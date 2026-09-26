@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Surprise</title>
+
+<style>
+
+/* ================================
+   DASAR
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ================================
+   HALAMAN KUE
+================================ */
+
+#cakePage {
+    width: 100vw;
+    height: 100vh;
+
+    background: #f3e6d5;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: opacity 1s ease;
+}
+
+#cakePage h1 {
+    color: #4d392d;
+    font-size: 28px;
+    font-weight: normal;
+    margin-bottom: 55px;
+}
+
+
+/* ================================
+   KUE
+================================ */
+
+.cake {
+    position: relative;
+    width: 330px;
+    height: 330px;
+}
+
+.bottom {
+    position: absolute;
+
+    width: 300px;
+    height: 85px;
+
+    left: 15px;
+    bottom: 25px;
+
+    background: linear-gradient(
+        #ffffff,
+        #eeeeee
+    );
+
+    border-radius: 12px 12px 20px 20px;
+
+    box-shadow:
+        0 12px 25px rgba(80,60,40,0.18);
+}
+
+.middle {
+    position: absolute;
+
+    width: 240px;
+    height: 75px;
+
+    left: 45px;
+    bottom: 100px;
+
+    background: linear-gradient(
+        #ffffff,
+        #eeeeee
+    );
+
+    border-radius: 12px 12px 18px 18px;
+
+    box-shadow:
+        0 10px 20px rgba(80,60,40,0.15);
+
+    z-index: 2;
+}
+
+.top {
+    position: absolute;
+
+    width: 180px;
+    height: 70px;
+
+    left: 75px;
+    bottom: 168px;
+
+    background: linear-gradient(
+        #ffffff,
+        #eeeeee
+    );
+
+    border-radius: 12px 12px 17px 17px;
+
+    box-shadow:
+        0 8px 18px rgba(80,60,40,0.15);
+
+    z-index: 3;
+}
+
+
+/* ================================
+   KRIM
+================================ */
+
+.cream {
+    position: absolute;
+
+    height: 17px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.08);
+
+    z-index: 6;
+}
+
+.cream1 {
+    width: 300px;
+    left: 15px;
+    bottom: 93px;
+}
+
+.cream2 {
+    width: 240px;
+    left: 45px;
+    bottom: 168px;
+}
+
+.cream3 {
+    width: 180px;
+    left: 75px;
+    bottom: 238px;
+}
+
+
+/* ================================
+   HIASAN KUE
+================================ */
+
+.dot {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #d3b99e;
+
+    z-index: 7;
+}
+
+.d1 {
+    left: 45px;
+    bottom: 50px;
+}
+
+.d2 {
+    left: 90px;
+    bottom: 50px;
+}
+
+.d3 {
+    left: 135px;
+    bottom: 50px;
+}
+
+.d4 {
+    left: 180px;
+    bottom: 50px;
+}
+
+.d5 {
+    left: 225px;
+    bottom: 50px;
+}
+
+.d6 {
+    left: 75px;
+    bottom: 120px;
+}
+
+.d7 {
+    left: 115px;
+    bottom: 120px;
+}
+
+.d8 {
+    left: 155px;
+    bottom: 120px;
+}
+
+.d9 {
+    left: 195px;
+    bottom: 120px;
+}
+
+
+/* ================================
+   LILIN
+================================ */
+
+.candles {
+    position: absolute;
+
+    left: 50%;
+    bottom: 238px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 42px;
+
+    z-index: 20;
+}
+
+.candle {
+    position: relative;
+
+    width: 15px;
+    height: 62px;
+
+    background: repeating-linear-gradient(
+        135deg,
+        #ffffff 0px,
+        #ffffff 7px,
+        #dedede 8px,
+        #dedede 11px
+    );
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.wick {
+    position: absolute;
+
+    width: 3px;
+    height: 9px;
+
+    background: #222;
+
+    left: 6px;
+    top: -8px;
+
+    border-radius: 3px;
+}
+
+.flame {
+    position: absolute;
+
+    width: 18px;
+    height: 27px;
+
+    left: -2px;
+    top: -34px;
+
+    background: radial-gradient(
+        ellipse at center bottom,
+        #fff8a5 0%,
+        #ffd447 35%,
+        #ff8c00 70%,
+        transparent 72%
+    );
+
+    border-radius: 50%;
+
+    filter:
+        drop-shadow(0 0 9px #ff9d00);
+
+    animation:
+        flameMove 0.4s infinite alternate;
+}
+
+@keyframes flameMove {
+
+    from {
+        transform:
+            rotate(-3deg)
+            scale(0.95);
+    }
+
+    to {
+        transform:
+            rotate(4deg)
+            scale(1.08);
+    }
+}
+
+.flame.off {
+    display: none;
+}
+
+.smoke {
+    position: absolute;
+
+    width: 12px;
+    height: 35px;
+
+    left: 2px;
+    top: -38px;
+
+    opacity: 0;
+}
+
+.smoke.show {
+    animation:
+        smokeUp 1.4s ease-out forwards;
+}
+
+@keyframes smokeUp {
+
+    0% {
+        opacity: 0.5;
+
+        transform:
+            translateY(0)
+            scale(0.5);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(-55px)
+            scale(1.8);
+    }
+}
+
+#hint {
+    margin-top: 45px;
+
+    color: #806f60;
+
+    font-size: 15px;
+}
+
+
+/* ================================
+   KEJUTAN
+================================ */
+
+#surprisePage {
+    position: fixed;
+
+    inset: 0;
+
+    background: #000;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    z-index: 100;
+
+    transition: opacity 0.9s ease;
+}
+
+.surprise-light {
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 30px white,
+        0 0 80px #ff80a0;
+
+    animation:
+        lightBurst 1.4s ease-out forwards;
+}
+
+@keyframes lightBurst {
+
+    0% {
+        transform:
+            translate(-50%, 0)
+            scale(1);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(-50%, -65vh)
+            scale(12);
+
+        opacity: 0;
+    }
+}
+
+
+/* ================================
+   CONFETTI
+================================ */
+
+#confetti {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+}
+
+.confetti {
+    position: absolute;
+
+    left: 50%;
+    bottom: -30px;
+
+    width: 9px;
+    height: 16px;
+
+    opacity: 0;
+
+    animation:
+        confettiUp 1.4s ease-out forwards,
+        confettiDown 3.5s ease-in 1.2s forwards;
+}
+
+@keyframes confettiUp {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(0,0)
+            rotate(0deg);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(var(--x),-75vh)
+            rotate(500deg);
+    }
+}
+
+@keyframes confettiDown {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(var(--x),-75vh)
+            rotate(500deg);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(
+                calc(var(--x) * 1.3),
+                15vh
+            )
+            rotate(1000deg);
+    }
+}
+
+
+/* ================================
+   HALAMAN SURAT
+================================ */
+
+#letterPage {
+    position: fixed;
+
+    inset: 0;
+
+    background: #f3e6d5;
+
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #4d392d;
+
+    opacity: 0;
+
+    transition: opacity 1s ease;
+
+    overflow: hidden;
+}
+
+#letterPage h2 {
+    font-size: 23px;
+
+    font-weight: normal;
+
+    margin-bottom: 35px;
+}
+
+
+/* ================================
+   AMPLOP
+================================ */
+
+.envelope {
+    position: relative;
+
+    width: 330px;
+    height: 220px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.04);
+}
+
+.envelope-body {
+    position: absolute;
+
+    inset: 0;
+
+    background: #ffffff;
+
+    border-radius: 7px;
+
+    box-shadow:
+        0 15px 40px rgba(80,60,40,0.18);
+
+    z-index: 1;
+}
+
+
+/* ================================
+   KERTAS SURAT
+================================ */
+
+.letter-paper {
+    position: absolute;
+
+    width: 300px;
+    height: 270px;
+
+    left: 15px;
+    bottom: 8px;
+
+    background: #fffdf8;
+
+    border-radius: 6px;
+
+    padding: 20px 22px;
+
+    color: #4d392d;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.12);
+
+    z-index: 2;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+
+    overflow: hidden;
+}
+
+.letter-paper h3 {
+    font-size: 20px;
+
+    font-weight: normal;
+
+    margin-bottom: 10px;
+}
+
+.letter-paper p {
+    font-size: 12.5px;
+
+    line-height: 1.5;
+
+    margin-bottom: 7px;
+}
+
+.letter-paper .small-heart {
+    color: #e45c78;
+
+    font-size: 20px;
+
+    margin-bottom: 2px;
+}
+
+
+/* ================================
+   LIPATAN AMPLOP
+================================ */
+
+.fold-left {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        165px solid #e5e5e5;
+
+    border-top:
+        110px solid transparent;
+
+    z-index: 4;
+}
+
+.fold-right {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-right:
+        165px solid #e5e5e5;
+
+    border-top:
+        110px solid transparent;
+
+    z-index: 4;
+}
+
+
+/* ================================
+   TUTUP AMPLOP
+================================ */
+
+.flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        165px solid transparent;
+
+    border-right:
+        165px solid transparent;
+
+    border-top:
+        115px solid #fafafa;
+
+    transform-origin:
+        top center;
+
+    transition:
+        transform 0.9s ease;
+
+    z-index: 6;
+}
+
+
+/* ================================
+   LOVE
+================================ */
+
+.heart {
+    position: absolute;
+
+    width: 32px;
+    height: 32px;
+
+    left: 50%;
+    top: 100px;
+
+    background: #ff5b78;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-45deg);
+
+    z-index: 10;
+
+    transition:
+        transform 0.5s ease;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+
+    position: absolute;
+
+    width: 32px;
+    height: 32px;
+
+    background: #ff5b78;
+
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -16px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 16px;
+}
+
+
+/* ================================
+   SURAT TERBUKA
+================================ */
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .heart {
+    transform:
+        translate(-50%,-50%)
+        rotate(-45deg)
+        scale(0);
+}
+
+.envelope.open .letter-paper {
+    opacity: 1;
+
+    transform:
+        translateY(-75px);
+
+    z-index: 8;
+}
+
+#openText {
+    margin-top: 25px;
+
+    color: #806f60;
+
+    font-size: 15px;
+}
+
+
+/* ================================
+   TOMBOL LANJUT
+================================ */
+
+#continueButton {
+    position: absolute;
+
+    bottom: 25px;
+
+    padding: 11px 25px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background: #d95c78;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.5s ease;
+
+    z-index: 20;
+}
+
+#continueButton.show {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* ================================
+   PESAN TERAKHIR
+================================ */
+
+#messagePage {
+    position: fixed;
+
+    inset: 0;
+
+    background: #f3e6d5;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 25px;
+
+    overflow: hidden;
+}
+
+.message-light {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    left: 50%;
+    bottom: -350px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,170,180,0.3),
+            transparent 70%
+        );
+
+    animation:
+        messageLight 2s ease forwards;
+}
+
+@keyframes messageLight {
+
+    from {
+        bottom: -450px;
+    }
+
+    to {
+        bottom: -250px;
+    }
+}
+
+.message-box {
+    position: relative;
+
+    z-index: 10;
+
+    max-width: 600px;
+
+    color: #4d392d;
+
+    opacity: 0;
+
+    transform:
+        translateY(60px);
+
+    animation:
+        messageAppear 1.4s ease forwards;
+}
+
+@keyframes messageAppear {
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+.message-box h1 {
+    font-size: 36px;
+
+    font-weight: normal;
+
+    margin-bottom: 30px;
+}
+
+.message-box p {
+    font-size: 19px;
+
+    line-height: 1.9;
+
+    margin-bottom: 8px;
+}
+
+.forever {
+    margin-top: 25px;
+
+    font-size: 23px !important;
+
+    color: #d95c78;
+}
+
+
+/* ================================
+   HP
+================================ */
+
+@media (max-width: 600px) {
+
+    #cakePage h1 {
+        font-size: 23px;
+    }
+
+    .cake {
+        transform: scale(0.78);
+    }
+
+    .envelope {
+        transform: scale(0.82);
+    }
+
+    .letter-paper {
+        width: 300px;
+        height: 270px;
+
+        left: 15px;
+
+        padding: 20px 20px;
+    }
+
+    .envelope.open .letter-paper {
+        transform:
+            translateY(-70px);
+    }
+
+    .letter-paper p {
+        font-size: 12px;
+
+        line-height: 1.48;
+    }
+
+    .message-box h1 {
+        font-size: 29px;
+    }
+
+    .message-box p {
+        font-size: 17px;
+    }
+
+    .forever {
+        font-size: 20px !important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================================
+     KUE
+================================ -->
+
+<section id="cakePage">
+
+    <h1>
+        Selamat Ulang Tahun 🎂
+    </h1>
+
+
+    <div class="cake">
+
+        <div class="candles">
+
+
+            <div
+                class="candle"
+                onclick="blowCandle(0)"
+            >
+
+                <div class="wick"></div>
+
+                <div class="flame"></div>
+
+                <div class="smoke"></div>
+
+            </div>
+
+
+            <div
+                class="candle"
+                onclick="blowCandle(1)"
+            >
+
+                <div class="wick"></div>
+
+                <div class="flame"></div>
+
+                <div class="smoke"></div>
+
+            </div>
+
+
+            <div
+                class="candle"
+                onclick="blowCandle(2)"
+            >
+
+                <div class="wick"></div>
+
+                <div class="flame"></div>
+
+                <div class="smoke"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="bottom"></div>
+
+        <div class="middle"></div>
+
+        <div class="top"></div>
+
+
+        <div class="cream cream1"></div>
+
+        <div class="cream cream2"></div>
+
+        <div class="cream cream3"></div>
+
+
+        <div class="dot d1"></div>
+        <div class="dot d2"></div>
+        <div class="dot d3"></div>
+        <div class="dot d4"></div>
+        <div class="dot d5"></div>
+
+        <div class="dot d6"></div>
+        <div class="dot d7"></div>
+        <div class="dot d8"></div>
+        <div class="dot d9"></div>
+
+    </div>
+
+
+    <p id="hint">
+        Klik ketiga lilinnya
+    </p>
+
+</section>
+
+
+
+<!-- ================================
+     KEJUTAN
+================================ -->
+
+<section id="surprisePage">
+
+    <div class="surprise-light"></div>
+
+    <div id="confetti"></div>
+
+</section>
+
+
+
+<!-- ================================
+     SURAT
+================================ -->
+
+<section id="letterPage">
+
+    <h2>
+        Ada sesuatu buat lu...
+    </h2>
+
+
+    <div
+        class="envelope"
+        id="envelope"
+        onclick="openLetter()"
+    >
+
+
+        <div class="envelope-body"></div>
+
+
+        <!-- ISI SURAT -->
+
+        <div class="letter-paper">
+
+            <div class="small-heart">
+                ♥
+            </div>
+
+
+            <h3>
+                Buat lu :)
+            </h3>
+
+
+            <p>
+                Selamat ulang tahun yaa 🎂
+            </p>
+
+
+            <p>
+                Gak kerasa yaa, waktu cepat banget.
+                Semoga di umur yang baru ini
+                banyak hal baik yang datang.
+            </p>
+
+
+            <p>
+                Semoga semua yang lu harapin
+                bisa tercapai satu-satu.
+                Tetap semangat buat ngejalanin
+                hari-hari ke depannya.
+            </p>
+
+
+            <p>
+                Jangan lupa nikmatin hari ini.
+                Semoga lu selalu punya alasan
+                buat senyum.
+            </p>
+
+
+            <p>
+                Dan satu lagi...
+                jangan jadi orang asing yaa.
+                Kita harus berteman selamanya 🤝
+            </p>
+
+        </div>
+
+
+        <div class="fold-left"></div>
+
+        <div class="fold-right"></div>
+
+
+        <div class="flap"></div>
+
+
+        <div class="heart"></div>
+
+    </div>
+
+
+    <p id="openText">
+        Klik suratnya
+    </p>
+
+
+    <button
+        id="continueButton"
+        onclick="showFinalMessage()"
+    >
+        Lanjut
+    </button>
+
+</section>
+
+
+
+<!-- ================================
+     PESAN TERAKHIR
+================================ -->
+
+<section id="messagePage">
+
+    <div class="message-light"></div>
+
+
+    <div class="message-box">
+
+        <h1>
+            Selamat ulang tahun 🎂
+        </h1>
+
+
+        <p>
+            Gak kerasa yaa, waktu cepat banget.
+        </p>
+
+
+        <p>
+            Semoga tahun ini banyak hal baik
+            yang datang buat lu.
+        </p>
+
+
+        <p class="forever">
+            Pokoknya kita harus berteman selamanya yaa 🤝
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* ================================
+   LILIN
+================================ */
+
+let candlesBlown = 0;
+
+
+function blowCandle(number) {
+
+    const candles =
+        document.querySelectorAll(".candle");
+
+    const candle =
+        candles[number];
+
+    const flame =
+        candle.querySelector(".flame");
+
+    const smoke =
+        candle.querySelector(".smoke");
+
+
+    if (
+        flame.classList.contains("off")
+    ) {
+        return;
+    }
+
+
+    flame.classList.add("off");
+
+    smoke.classList.add("show");
+
+    candlesBlown++;
+
+
+    if (
+        candlesBlown === 3
+    ) {
+
+        document.getElementById(
+            "hint"
+        ).textContent =
+            "✨ Tunggu sebentar...";
+
+
+        setTimeout(
+            startSurprise,
+            1200
+        );
+    }
+}
+
+
+/* ================================
+   KEJUTAN
+================================ */
+
+function startSurprise() {
+
+    const cakePage =
+        document.getElementById(
+            "cakePage"
+        );
+
+    const surprisePage =
+        document.getElementById(
+            "surprisePage"
+        );
+
+
+    cakePage.style.opacity =
+        "0";
+
+
+    setTimeout(function() {
+
+        cakePage.style.display =
+            "none";
+
+
+        surprisePage.style.display =
+            "flex";
+
+        surprisePage.style.opacity =
+            "1";
+
+
+        createConfetti();
+
+
+        setTimeout(function() {
+
+            surprisePage.style.opacity =
+                "0";
+
+
+            setTimeout(function() {
+
+                surprisePage.style.display =
+                    "none";
+
+
+                showLetter();
+
+            }, 900);
+
+        }, 4700);
+
+
+    }, 1000);
+}
+
+
+/* ================================
+   CONFETTI
+================================ */
+
+function createConfetti() {
+
+    const container =
+        document.getElementById(
+            "confetti"
+        );
+
+
+    const colors = [
+
+        "#ff4f81",
+        "#ffcc4d",
+        "#5ac8fa",
+        "#a66cff",
+        "#4cd964",
+        "#ffffff",
+        "#ff7b54",
+        "#ff80ab"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 180;
+        i++
+    ) {
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        piece.className =
+            "confetti";
+
+
+        piece.style.left =
+            (
+                5 +
+                Math.random() * 90
+            ) + "vw";
+
+
+        piece.style.backgroundColor =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+
+        const direction =
+            (
+                Math.random() -
+                0.5
+            ) * 1000;
+
+
+        piece.style.setProperty(
+            "--x",
+            direction + "px"
+        );
+
+
+        piece.style.width =
+            (
+                6 +
+                Math.random() * 8
+            ) + "px";
+
+
+        piece.style.height =
+            (
+                9 +
+                Math.random() * 14
+            ) + "px";
+
+
+        piece.style.animationDelay =
+            (
+                Math.random() * 0.35
+            ) + "s";
+
+
+        container.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            function() {
+
+                piece.remove();
+
+            },
+            6000
+        );
+    }
+}
+
+
+/* ================================
+   TAMPILKAN SURAT
+================================ */
+
+function showLetter() {
+
+    const letterPage =
+        document.getElementById(
+            "letterPage"
+        );
+
+
+    letterPage.style.display =
+        "flex";
+
+
+    setTimeout(function() {
+
+        letterPage.style.opacity =
+            "1";
+
+    }, 50);
+}
+
+
+/* ================================
+   BUKA SURAT
+================================ */
+
+function openLetter() {
+
+    const envelope =
+        document.getElementById(
+            "envelope"
+        );
+
+
+    const openText =
+        document.getElementById(
+            "openText"
+        );
+
+
+    const button =
+        document.getElementById(
+            "continueButton"
+        );
+
+
+    if (
+        envelope.classList.contains("open")
+    ) {
+        return;
+    }
+
+
+    envelope.classList.add(
+        "open"
+    );
+
+
+    openText.style.display =
+        "none";
+
+
+    createLetterConfetti();
+
+
+    setTimeout(function() {
+
+        button.classList.add(
+            "show"
+        );
+
+    }, 1100);
+}
+
+
+/* ================================
+   CONFETTI SURAT
+================================ */
+
+function createLetterConfetti() {
+
+    const colors = [
+
+        "#ff4f81",
+        "#ffcc4d",
+        "#5ac8fa",
+        "#a66cff",
+        "#ff80ab"
+
+    ];
+
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        piece.style.position =
+            "fixed";
+
+        piece.style.left =
+            "50%";
+
+        piece.style.top =
+            "55%";
+
+        piece.style.width =
+            "7px";
+
+        piece.style.height =
+            "12px";
+
+        piece.style.backgroundColor =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
+
+        piece.style.zIndex =
+            "50";
+
+        piece.style.pointerEvents =
+            "none";
+
+
+        const x =
+            (
+                Math.random() -
+                0.5
+            ) * 500;
+
+
+        const y =
+            (
+                Math.random() -
+                0.5
+            ) * 350;
+
+
+        piece.animate(
+
+            [
+                {
+                    transform:
+                        "translate(0,0) rotate(0deg)",
+                    opacity: 1
+                },
+
+                {
+                    transform:
+                        `translate(${x}px, ${y}px) rotate(500deg)`,
+                    opacity: 0
+                }
+
+            ],
+
+            {
+                duration: 1300,
+                easing: "ease-out"
+            }
+
+        );
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            function() {
+
+                piece.remove();
+
+            },
+            1400
+        );
+    }
+}
+
+
+/* ================================
+   PESAN TERAKHIR
+================================ */
+
+function showFinalMessage() {
+
+    const letterPage =
+        document.getElementById(
+            "letterPage"
+        );
+
+    const messagePage =
+        document.getElementById(
+            "messagePage"
+        );
+
+
+    letterPage.style.opacity =
+        "0";
+
+
+    setTimeout(function() {
+
+        letterPage.style.display =
+            "none";
+
+
+        messagePage.style.display =
+            "flex";
+
+    }, 900);
+}
+
+</script>
+
+</body>
+</html>
